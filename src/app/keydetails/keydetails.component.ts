@@ -22,13 +22,13 @@ export class KeydetailsComponent implements OnInit {
 
   keydetails: Keydetails[];
 
-  tenantIds: string[] = ['NCET', 'BMSIT', 'NCET_ENG_BLR'];
+  tenantIds: string[] = [];
 
   serviceNames: string[] = [];
 
   newApiRegForm: FormGroup;
 
-  apiKey: string;
+  accessToken: string;
 
   searchStr: string;
 
@@ -38,6 +38,9 @@ export class KeydetailsComponent implements OnInit {
     this.loadApiServiceDetails();
     this.appService.serviceNames().subscribe(services => {
       this.serviceNames = services;
+    });
+    this.appService.allTenantIds().subscribe(resp => {
+      this.tenantIds = resp;
     });
   }
 
@@ -51,24 +54,29 @@ export class KeydetailsComponent implements OnInit {
     this.appService.createNewApiKey(this.newApiRegForm.value).subscribe(res => {
       if (res) {
         this.newApiRegForm.reset();
-        this.apiKey = `Token :${res.apiKey}`;
+        this.accessToken = res.apiKey;
+        this.loadApiServiceDetails();
       } else {
         console.log('Error : ', res);
       }
     },
       err => {
-        this.apiKey = 'With this details already api is existing';
+        this.accessToken = 'With this details already api is existing';
       }
     );
   }
 
 
   onChangeTenant(tenantId: string) {
-    this.appService.apiServiceDetailsByTenantId(tenantId).subscribe(resp => {
-      if (resp) {
-        this.keydetails = resp;
-      }
-    });
+    if (tenantId) {
+      this.appService.apiServiceDetailsByTenantId(tenantId).subscribe(resp => {
+        if (resp) {
+          this.keydetails = resp;
+        }
+      });
+    } else {
+      this.loadApiServiceDetails();
+    }
   }
 
 

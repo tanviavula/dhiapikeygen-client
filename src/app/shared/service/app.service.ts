@@ -21,6 +21,10 @@ export class AppService {
     return this.http.get<string[]>(`${this.base_url}servicenames`);
   }
 
+  allTenantIds() {
+    return this.http.get<string[]>(`${this.base_url}alltenantids`);
+  }
+
   apiServiceDetails() {
     return this.http.get<Keydetails[]>(`${this.base_url}allactivekeys`);
   }
