@@ -15,8 +15,8 @@ export class AuthService {
 
   public currentUser = new Subject<string>();
   constructor(private http: HttpClient,
-      tSe        //private jwtService: Jwrvice
-              ) { }
+    //private jwtService: Jwrvice
+  ) { }
 
   base_url = environment.base_url_login;
   private JWT_TOKEN = 'DHI_JWT_TOKEN';
@@ -33,14 +33,14 @@ export class AuthService {
     );
   }
 
-  loggedInUsername(){
-    return  localStorage.getItem("email");
+  loggedInUsername() {
+    return localStorage.getItem("email");
   }
 
   private loginInit(user: LoginRequest, tokenObj: string) {
     this.logedUser = user.email;
     const token = tokenObj['token'];
-    localStorage.setItem("email",user.email);
+    localStorage.setItem("email", user.email);
     this.storeJwtToken(token);
     this.currentUser.next(user.email);
   }
@@ -55,7 +55,7 @@ export class AuthService {
 
   getJwtToken() {
     const token = localStorage.getItem(this.JWT_TOKEN);
-      return token;
+    return token;
   }
 
 

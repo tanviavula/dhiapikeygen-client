@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "dhiapikeygen-client"
+    }
+  },
+  "defaultProject": "dhiapikeygen-client",
+  "cli": {
+    "analytics": false
+  }
 }
