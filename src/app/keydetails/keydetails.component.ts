@@ -10,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./keydetails.component.css']
 })
 export class KeydetailsComponent implements OnInit {
+  dtOptions: DataTables.Settings = {
+       searching:false
+  };
+  dtTrigger = new Subject();
 
   constructor(private appService: AppService, private formBuilder: FormBuilder) {
     this.newApiRegForm = this.formBuilder.group({
@@ -35,7 +39,9 @@ export class KeydetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.loadApiServiceDetails();
+
     this.appService.serviceNames().subscribe(services => {
       this.serviceNames = services;
     });
@@ -45,8 +51,10 @@ export class KeydetailsComponent implements OnInit {
   }
 
   loadApiServiceDetails() {
+    this.keydetails = [];
     this.appService.apiServiceDetails().subscribe(res => {
       this.keydetails = res;
+      this.dtTrigger.next();
     });
   }
 
@@ -78,8 +86,6 @@ export class KeydetailsComponent implements OnInit {
       this.loadApiServiceDetails();
     }
   }
-
-
   deactivate(id: string) {
     const status = 'INACTIVE';
     if (confirm('Are you sure to deactivate?')) {
@@ -92,9 +98,11 @@ export class KeydetailsComponent implements OnInit {
   }
 
   search() {
-    if (this.searchStr.length > 2) {
+    if (this.searchStr.length > 0) {
+      this.keydetails = [];
       this.appService.search(this.searchStr).subscribe(resp => {
         this.keydetails = resp;
+
       });
     } else {
       this.loadApiServiceDetails();
@@ -114,6 +122,11 @@ export class KeydetailsComponent implements OnInit {
 
   get serviceId() {
     return this.newApiRegForm.get('serviceId');
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }

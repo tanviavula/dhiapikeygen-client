@@ -45,6 +45,7 @@ export class ApiserviceComponent implements OnInit,OnDestroy {
       this.appService.addServiceDetails(this.apiForm.value).subscribe(resp => {
         if (resp) {
           this.loadAllApiKeyServices();
+
         } else {
           alert('Failed to add');
         }
