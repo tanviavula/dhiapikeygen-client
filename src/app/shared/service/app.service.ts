@@ -1,3 +1,4 @@
+import { DhiApiKeyServiceDetailsDTO } from './../model/DhiApiKeyServiceDetailsDTO';
 import { DhiApiKeyBasicDTO } from './../model/dhi-api-key-basic-dto';
 import { Keydetails } from './../model/keydetails';
 import { environment } from './../../../environments/environment';
@@ -11,6 +12,8 @@ import { Injectable } from '@angular/core';
 export class AppService {
 
   base_url = environment.base_url;
+
+
   constructor(private http: HttpClient) { }
 
 
@@ -37,5 +40,18 @@ export class AppService {
   apiServiceDetailsByTenantId(tenantId: string) {
     return this.http.get<Keydetails[]>(`${this.base_url}tenantkeys/${tenantId}`);
   }
+
+  addServiceDetails(data: DhiApiKeyServiceDetailsDTO) {
+    return this.http.post<DhiApiKeyServiceDetailsDTO>(`${this.base_url}addnewservice`, data);
+  }
+
+  getAllApiKeyServices() {
+    return this.http.get<DhiApiKeyServiceDetailsDTO[]>(`${this.base_url}allservices`);
+  }
+
+  deleteApiKeyServiceDetails(id: string) {
+    return this.http.delete(`${this.base_url}removeservice/${id}`);
+  }
+
 
 }

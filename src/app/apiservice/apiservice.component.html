@@ -1,1 +1,78 @@
-<p>apiservice works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+
+            <div class="row mt-2 mb-2">
+
+                <!-- <div class="col-md-6">
+                    <input class="form-control" type="text" placeholder="Search">
+                </div> -->
+
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newApiServiceModal"
+                        (click)="close()">New</button>
+                </div>
+
+
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Service Name</th>
+                        <th scope="col">Description </th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let service of apiServices;index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{service.name}}</td>
+                        <td>{{service.description}}</td>
+                        <td (click)="delete(service.id)" style="cursor: pointer;color: red;"> Delete</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Form Modal start -->
+<div class="modal fade" id="newApiServiceModal" tabindex="-1" role="dialog" aria-labelledby="newApiServiceModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newApiServiceModalLabel" [hidden]="canUpdate">New Api Service</h5>
+                <h5 class="modal-title" id="newApiServiceModalLabel" [hidden]="!canUpdate">Update Api Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="apiForm" (ngSubmit)="regNewApiService()">
+
+                    <div class="form-group">
+                        <label for="name">Service Name </label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" class="form-control" id="description"
+                            formControlName="description"> </textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="close()"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" [hidden]="canUpdate">Add</button>
+                        <button type="submit" class="btn btn-primary" [hidden]="!canUpdate">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form modal end -->

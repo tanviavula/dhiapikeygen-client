@@ -51,7 +51,7 @@ export class KeydetailsComponent implements OnInit {
     this.appService.createNewApiKey(this.newApiRegForm.value).subscribe(res => {
       if (res) {
         this.newApiRegForm.reset();
-        this.apiKey = res.apiKey;
+        this.apiKey = `Token :${res.apiKey}`;
       } else {
         console.log('Error : ', res);
       }
