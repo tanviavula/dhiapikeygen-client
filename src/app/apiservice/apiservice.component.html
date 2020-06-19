@@ -7,27 +7,29 @@
                 <!-- <div class="col-md-6">
                     <input class="form-control" type="text" placeholder="Search">
                 </div> -->
-
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newApiServiceModal"
-                        (click)="close()">New</button>
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#newApiServiceModal"
+                        (click)="close()">Add New Service</button>
                 </div>
 
 
             </div>
+            <hr>
 
-            <table class="table">
+
+            <table datatable  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Service Name</th>
-                        <th scope="col">Description </th>
-                        <th scope="col">Delete</th>
+                        <th>#</th>
+                        <th>Service Name</th>
+                        <th>Description </th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let service of apiServices;index as i">
-                        <th scope="row">{{i+1}}</th>
+                        <td>{{i+1}}</td>
                         <td>{{service.name}}</td>
                         <td>{{service.description}}</td>
                         <td (click)="delete(service.id)" style="cursor: pointer;color: red;"> Delete</td>
@@ -76,3 +78,5 @@
     </div>
 </div>
 <!-- Form modal end -->
+
+
