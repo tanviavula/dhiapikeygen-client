@@ -1,0 +1,22 @@
+.tokenbox{
+    border: 1px solid black;
+    padding: 5px;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+.badge-icon{
+  color: #fff;
+  background-color:#273746;
+  font-size: 15px;
+  border-radius: 74%;
+  padding: 8px;
+  float: right;
+  margin-top: 10px;
+  margin-right: -18px;
+}
+.badge-icon:hover{
+  background-color: #3633FF;
+}
+

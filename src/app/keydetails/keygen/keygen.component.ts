@@ -1,14 +1,13 @@
 import { AppService } from './../../shared/service/app.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-keyregistrationform',
-  templateUrl: './keyregistrationform.component.html',
-  styleUrls: ['./keyregistrationform.component.css']
+  selector: 'app-keygen',
+  templateUrl: './keygen.component.html',
+  styleUrls: ['./keygen.component.css']
 })
-export class KeyregistrationformComponent implements OnInit {
-
+export class KeygenComponent implements OnInit {
   constructor(private appService: AppService, private formBuilder: FormBuilder) {
 
     this.newApiRegForm = this.formBuilder.group({
@@ -26,21 +25,23 @@ export class KeyregistrationformComponent implements OnInit {
   serviceNames: string[] = [];
 
   duplicate: boolean;
+  message = "Copy API key"
 
   ngOnInit(): void {
 
     this.newApiRegForm.reset();
-
     this.appService.serviceNames().subscribe(services => {
       this.serviceNames = services;
     });
   }
 
   addNewApi() {
+    this.message = "Copy API key"
     this.resetForm();
     this.appService.createNewApiKey(this.newApiRegForm.value).subscribe(res => {
       if (res) {
         this.accessToken = res.apiKey;
+        this.newApiRegForm.reset();
       } else {
         console.log('Error : ', res);
       }
@@ -52,11 +53,9 @@ export class KeyregistrationformComponent implements OnInit {
   }
 
 
-  copy(inputElement) {
-    inputElement.select();
-    document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);
-    alert('Copied access token to clip board');
+  copy() {
+    this.message = "Copied...";
+    navigator.clipboard.writeText(this.accessToken);
   }
 
   resetForm() {
@@ -66,7 +65,7 @@ export class KeyregistrationformComponent implements OnInit {
 
   reset() {
     this.newApiRegForm.reset();
-    this.resetForm();
+
   }
 
 
@@ -83,5 +82,4 @@ export class KeyregistrationformComponent implements OnInit {
   get serviceId() {
     return this.newApiRegForm.get('serviceId');
   }
-
 }

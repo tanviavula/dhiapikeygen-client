@@ -12,7 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { KeyregistrationformComponent } from './keydetails/keyregistrationform/keyregistrationform.component';
+import { KeygenComponent } from './keydetails/keygen/keygen.component';
+import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { KeyregistrationformComponent } from './keydetails/keyregistrationform/k
     ApiserviceComponent,
     HeaderComponent,
     HomeComponent,
-    KeyregistrationformComponent
+    KeygenComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,8 @@ import { KeyregistrationformComponent } from './keydetails/keyregistrationform/k
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbPaginationModule, NgbAlertModule, NgbModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]

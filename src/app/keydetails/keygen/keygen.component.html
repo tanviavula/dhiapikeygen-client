@@ -1,0 +1,71 @@
+
+<div class="container">
+  <div class="row mt-2">
+         <div class="col-md-8 offset-md-2">
+          <h4 class="text-info">Generate new API Key</h4>
+          <form [formGroup]="newApiRegForm" (ngSubmit)="addNewApi()">
+              <div class="form-group">
+                  <label for="tenantid">TenantId</label>
+                  <input [class.is-invalid]="tenantId.touched && tenantId.invalid" type="text" class="form-control"
+                      id="tenantid" formControlName="tenantId" />
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  <div *ngIf="tenantId.touched && tenantId.invalid">
+                      <small *ngIf="email.errors.required" class="text-danger">TenantId cant be empty</small>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="email">Email</label>
+                  <input [class.is-invalid]="email.touched && email.invalid" type="email" class="form-control"
+                      id="email" formControlName="email" />
+
+                  <div *ngIf="email.touched && email.invalid">
+                      <small *ngIf="email.errors.required" class="text-danger">Email cant be empty</small>
+                      <small *ngIf="email.errors.email" class="text-danger">Invalid Email</small>
+                  </div>
+              </div>
+
+              <div class="form-group" *ngIf="serviceNames.length > 0">
+                  <label for="serviceId">ServiceId</label>
+                  <select formControlName="serviceId" [class.is-invalid]="serviceId.touched && serviceId.invalid"
+                      id="serviceId" class="custom-select">
+                      <option [ngValue]="null" selected disabled>Choose your service</option>
+                      <option *ngFor="let service of serviceNames" [ngValue]="service">
+                          {{ service }}
+                      </option>
+                  </select>
+                  <div *ngIf="serviceId.touched && serviceId.invalid">
+                      <small *ngIf="serviceId.errors.required" class="text-danger">ServiceId cant be empty</small>
+                  </div>
+              </div>
+
+
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" (click)="reset()">
+                      Reset
+                  </button>
+                  <button type="submit" [disabled]="newApiRegForm.invalid" class="btn btn-primary">
+                      Create
+                  </button>
+
+                  <a type="button" routerLink="/home"> Cancel
+                  </a>
+              </div>
+          </form>
+
+          <div *ngIf="accessToken">
+            <h5>API Token</h5>
+            <p>Use your Font Awesome kits inside another application, like WordPress, with an API token.</p>
+            <div class="tokenbox">
+              {{accessToken}}
+                <i class="fas fa-copy badge-icon" (click)="copy()" placement="right" ngbTooltip={{message}}></i>
+
+              </div>
+
+        </div>
+        <div class="form-group mt-2" *ngIf="duplicate">
+            <h5 class="text-danger">With this details already api is existing</h5>
+        </div>
+      </div>
+  </div>
+</div>
+

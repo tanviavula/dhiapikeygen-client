@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-auto mr-auto"></div>
     <div class="col col-auto">
-      <button type="button" class="btn btn-primary" routerLink="/home/register" data-toggle="tooltip"
+      <button type="button" class="btn btn-primary" routerLink="/home/keygen" data-toggle="tooltip"
         data-placement="top" title="Register for New API Service" data-delay="0" data-animation="true">
         Create New Apikey
       </button>
@@ -13,7 +13,7 @@
     <div class="col-md-4">
       <div class="form-group" *ngIf="tenantIds.length > 0">
         <select class="custom-select" #selectedTenant (change)="onChangeTenant(selectedTenant.value)">
-          <option value="">Select</option>
+          <option value="">Select Tenant</option>
           <option *ngFor="let id of tenantIds" [value]="id">{{ id }}</option>
         </select>
       </div>

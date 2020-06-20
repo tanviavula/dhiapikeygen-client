@@ -1,4 +1,4 @@
-import { KeyregistrationformComponent } from './keydetails/keyregistrationform/keyregistrationform.component';
+import { KeygenComponent } from './keydetails/keygen/keygen.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 
@@ -36,8 +36,8 @@ const routes: Routes = [
         component: KeydetailsComponent,
       },
       {
-        path: 'register',
-        component: KeyregistrationformComponent
+        path: 'keygen',
+        component: KeygenComponent
       },
       {
         path: 'services',
