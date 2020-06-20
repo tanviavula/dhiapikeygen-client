@@ -25,6 +25,8 @@ export class KeyregistrationformComponent implements OnInit {
 
   serviceNames: string[] = [];
 
+  duplicate: boolean;
+
   ngOnInit(): void {
 
     this.newApiRegForm.reset();
@@ -35,20 +37,37 @@ export class KeyregistrationformComponent implements OnInit {
   }
 
   addNewApi() {
+    this.resetForm();
     this.appService.createNewApiKey(this.newApiRegForm.value).subscribe(res => {
       if (res) {
-        this.newApiRegForm.reset();
         this.accessToken = res.apiKey;
       } else {
         console.log('Error : ', res);
       }
     },
       err => {
-        this.accessToken = 'With this details already api is existing';
+        this.duplicate = true;
       }
     );
   }
 
+
+  copy(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    alert('Copied access token to clip board');
+  }
+
+  resetForm() {
+    this.duplicate = false;
+    this.accessToken = null;
+  }
+
+  reset() {
+    this.newApiRegForm.reset();
+    this.resetForm();
+  }
 
 
   get tenantId() {
