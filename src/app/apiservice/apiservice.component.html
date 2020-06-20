@@ -9,16 +9,14 @@
                 </div> -->
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#newApiServiceModal"
-                        (click)="close()">Add New Service</button>
+                    <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                        data-target="#newApiServiceModal" (click)="close()">Add New Service</button>
                 </div>
-
-
             </div>
+
             <hr>
 
-
-            <table datatable  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -78,5 +76,3 @@
     </div>
 </div>
 <!-- Form modal end -->
-
-

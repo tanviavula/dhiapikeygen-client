@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   templateUrl: './apiservice.component.html',
   styleUrls: ['./apiservice.component.css']
 })
-export class ApiserviceComponent implements OnInit,OnDestroy {
+export class ApiserviceComponent implements OnInit, OnDestroy {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
@@ -45,7 +45,6 @@ export class ApiserviceComponent implements OnInit,OnDestroy {
       this.appService.addServiceDetails(this.apiForm.value).subscribe(resp => {
         if (resp) {
           this.loadAllApiKeyServices();
-
         } else {
           alert('Failed to add');
         }

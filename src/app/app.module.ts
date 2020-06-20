@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { KeyregistrationformComponent } from './keydetails/keyregistrationform/keyregistrationform.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     KeydetailsComponent,
     ApiserviceComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    KeyregistrationformComponent
   ],
   imports: [
     BrowserModule,

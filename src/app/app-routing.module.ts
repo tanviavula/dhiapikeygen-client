@@ -1,3 +1,4 @@
+import { KeyregistrationformComponent } from './keydetails/keyregistrationform/keyregistrationform.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 
@@ -10,46 +11,50 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 const routes: Routes = [
 
-    {
-      path:'',
-      component:LoginComponent
-    },
-    {
-      path:'login',
-      component:LoginComponent
-    },
-    {
-      path:'home',
-      component:HomeComponent,
-      canActivate:[AuthGuard],
+  {
+    path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
 
-      children:[
-        {
-          path:'',
-          redirectTo:'/home/apikeylist',
-          pathMatch:'full'
+    children: [
+      {
+        path: '',
+        redirectTo: '/home/apikeylist',
+        pathMatch: 'full'
 
-        },
-        {
-          path:'apikeylist',
-          component:KeydetailsComponent,
-        },
-        {
-          path:'services',
-          component:ApiserviceComponent,
-          canActivate:[AuthGuard]
-        }
-      ],
+      },
+      {
+        path: 'apikeylist',
+        component: KeydetailsComponent,
+      },
+      {
+        path: 'register',
+        component: KeyregistrationformComponent
+      },
+      {
+        path: 'services',
+        component: ApiserviceComponent,
+        canActivate: [AuthGuard]
+      }
+    ],
 
-    },
+  },
 
-    {
-      path: 'logout',
-      redirectTo: ''
-    },{
-      path:'**',
-      redirectTo:'login'
-    }
+  {
+    path: 'logout',
+    redirectTo: ''
+  }, {
+    path: '**',
+    redirectTo: 'login'
+  }
 
 ];
 
