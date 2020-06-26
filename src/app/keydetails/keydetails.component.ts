@@ -16,7 +16,7 @@ export class KeydetailsComponent implements OnInit, OnDestroy {
 
   dtTrigger = new Subject();
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) { }
 
   keydetails: Keydetails[];
 
@@ -44,6 +44,7 @@ export class KeydetailsComponent implements OnInit, OnDestroy {
   }
 
   loadApiServiceDetails() {
+    this.dtTrigger = new Subject();
     this.keydetails = [];
     this.appService.apiServiceDetails().subscribe(res => {
       this.keydetails = res;
