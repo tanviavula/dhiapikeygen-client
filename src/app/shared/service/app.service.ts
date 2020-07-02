@@ -54,7 +54,7 @@ export class AppService {
   }
 
   deleteApiKeyServiceDetails(id: string) {
-    return this.http.delete(`${this.base_url}removeservice/${id}`);
+    return this.http.delete<any>(`${this.base_url}removeservice/${id}`);
   }
 
 

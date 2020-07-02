@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9 mr-auto">
-        <p class="text">API Keys provides a mechanism for external Applications to integrate with Dhi suite. Keys are the programmatic authentication and Authorization mechanism for the application. This tool helps in managing the Keys. You can create a Key for a Service for the consumption of different Users of a Dhi Tenants</p>
+      <p class="text">API Keys provides a mechanism for external Applications to integrate with Dhi suite. Keys are the
+        programmatic authentication and Authorization mechanism for the application. This tool helps in managing the
+        Keys. You can create a Key for a Service for the consumption of different Users of a Dhi Tenants</p>
     </div>
     <div class="col col-auto">
-      <button type="button" class="btn btn-primary" routerLink="/home/keygen" data-toggle="tooltip"
-        data-placement="top" title="Register for New API Service" data-delay="0" data-animation="true">
+      <button type="button" class="btn btn-primary" routerLink="/home/keygen" data-toggle="tooltip" data-placement="top"
+        title="Register for New API Service" data-delay="0" data-animation="true">
         Create New Apikey
       </button>
     </div>
@@ -27,12 +29,15 @@
     </div>
 
     <div class="col-md-2">
-      <button type="button" class="btn btn-info" (click)="search()">
+      <button [disabled]="!(searchStr && searchStr.length>0)" type="button" class="btn btn-info" (click)="search()">
         Search
       </button>
     </div>
   </div>
+
+
   <hr>
+
 
   <div class="row mt-2">
     <div class="col-md-12 mb-5">

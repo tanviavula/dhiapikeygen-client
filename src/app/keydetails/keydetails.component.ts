@@ -26,7 +26,7 @@ export class KeydetailsComponent implements OnInit, OnDestroy {
 
   accessToken: string;
 
-  searchStr: string;
+  searchStr = '';
 
 
   ngOnInit(): void {
@@ -83,7 +83,7 @@ export class KeydetailsComponent implements OnInit, OnDestroy {
       this.appService.search(this.searchStr).subscribe(resp => {
         this.keydetails = resp;
       });
-    } else if (this.searchStr) {
+    } else {
       this.loadApiServiceDetails();
     }
   }

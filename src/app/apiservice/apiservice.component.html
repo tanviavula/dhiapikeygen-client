@@ -55,7 +55,8 @@
 
                     <div class="form-group">
                         <label for="name">Service Name </label>
-                        <input  [class.is-invalid]="name.touched && name.invalid" type="text" class="form-control" id="name" formControlName="name">
+                        <input [class.is-invalid]="name.touched && name.invalid" type="text" class="form-control"
+                            id="name" formControlName="name">
 
                         <small id="name" class="form-text text-muted">DESC about Service </small>
 
@@ -67,20 +68,22 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea [class.is-invalid]="description.touched && description.invalid"  type="text" class="form-control" id="description"
-                            formControlName="description"> </textarea>
+                        <textarea [class.is-invalid]="description.touched && description.invalid" type="text"
+                            class="form-control" id="description" formControlName="description"> </textarea>
 
-                            <small id="description" class="form-text text-muted">DESC about description </small>
+                        <small id="description" class="form-text text-muted">DESC about description </small>
 
                         <div *ngIf="description.touched && description.invalid">
-                            <small *ngIf="description.errors.required" class="text-danger">Description can't be empty</small>
+                            <small *ngIf="description.errors.required" class="text-danger">Description can't be
+                                empty</small>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="close()"
+                        <button #closebutton type="button" class="btn btn-secondary" (click)="close()"
                             data-dismiss="modal">Close</button>
-                        <button type="submit" [disabled]="apiForm.invalid" class="btn btn-primary" [hidden]="canUpdate">Add</button>
+                        <button type="submit" [disabled]="apiForm.invalid" class="btn btn-primary"
+                            [hidden]="canUpdate">Create</button>
                         <button type="submit" class="btn btn-primary" [hidden]="!canUpdate">Update</button>
                     </div>
                 </form>

@@ -1,7 +1,7 @@
 
 import { AppService } from './../shared/service/app.service';
 import { DhiApiKeyServiceDetailsDTO } from './../shared/model/DhiApiKeyServiceDetailsDTO';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 
@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
 })
 export class ApiserviceComponent implements OnInit, OnDestroy {
 
+  @ViewChild('closebutton') closebutton;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   apiServices: DhiApiKeyServiceDetailsDTO[] = [];
@@ -19,6 +21,7 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
   apiForm: FormGroup;
 
   canUpdate = false;
+
 
   constructor(private formBuilder: FormBuilder, private appService: AppService) {
     this.apiForm = this.formBuilder.group({
@@ -32,6 +35,7 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
   }
 
   loadAllApiKeyServices() {
+    this.dtTrigger = new Subject();
     this.appService.getAllApiKeyServices().subscribe(resp => {
       this.apiServices = resp;
       this.dtTrigger.next();
@@ -45,6 +49,7 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
       this.appService.addServiceDetails(this.apiForm.value).subscribe(resp => {
         if (resp) {
           this.loadAllApiKeyServices();
+          this.closebutton.nativeElement.click();
         } else {
           alert('Failed to add');
         }
@@ -55,9 +60,16 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
   delete(id: string) {
     if (confirm(`Are you sure to delete this service?`)) {
       this.appService.deleteApiKeyServiceDetails(id).subscribe(resp => {
+
+        console.log(resp);
+
         if (resp) {
           this.loadAllApiKeyServices();
+        } else {
+          alert('Failed to delete service');
         }
+      }, error => {
+        alert('Something went wrong while deleting service');
       });
     }
   }
