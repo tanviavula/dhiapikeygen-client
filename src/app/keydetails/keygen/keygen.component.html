@@ -2,13 +2,13 @@
 <div class="container">
   <div class="row mt-2">
          <div class="col-md-8 offset-md-2">
-          <h4 class="text-info">Generate new API Key</h4>
+          <h4 class="text-info">New API Key</h4>
           <form [formGroup]="newApiRegForm" (ngSubmit)="addNewApi()">
               <div class="form-group">
-                  <label for="tenantid">TenantId</label>
+                  <label for="tenantid">Tenant ID</label>
                   <input [class.is-invalid]="tenantId.touched && tenantId.invalid" type="text" class="form-control"
                       id="tenantid" formControlName="tenantId" />
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      <small id="emailHelp" class="form-text text-muted">Provide the Tenant ID for whom this API key is being generated. The TenantID is a plain text key identifying the tenant - Dhi application's Tenant ID.</small>
                   <div *ngIf="tenantId.touched && tenantId.invalid">
                       <small *ngIf="email.errors.required" class="text-danger">TenantId cant be empty</small>
                   </div>
@@ -17,7 +17,8 @@
                   <label for="email">Email</label>
                   <input [class.is-invalid]="email.touched && email.invalid" type="email" class="form-control"
                       id="email" formControlName="email" />
-
+                      <small id="email" class="form-text text-muted">Provide the user id (an email id ) for whom this Api Key is assigned. This is typically a third party vendor for whom the Dhi Tenants authorizes access to the Dhi application (mostly inward flow of data)
+                    </small>
                   <div *ngIf="email.touched && email.invalid">
                       <small *ngIf="email.errors.required" class="text-danger">Email cant be empty</small>
                       <small *ngIf="email.errors.email" class="text-danger">Invalid Email</small>
@@ -33,6 +34,7 @@
                           {{ service }}
                       </option>
                   </select>
+                  <small id="serviceId" class="form-text text-muted">This is the Service that Tenant is subscribing to - For ex: profile input.</small>
                   <div *ngIf="serviceId.touched && serviceId.invalid">
                       <small *ngIf="serviceId.errors.required" class="text-danger">ServiceId cant be empty</small>
                   </div>
@@ -54,7 +56,7 @@
 
           <div *ngIf="accessToken">
             <h5>API Token</h5>
-            <p>Use your Font Awesome kits inside another application, like WordPress, with an API token.</p>
+            <p> Please copy the Key and Safely secure the keys. Key should not be proliferated and kept in confidential. Compromising a key will provide unauthorized access to the Tenant's Service.</p>
             <div class="tokenbox">
               {{accessToken}}
                 <i class="fas fa-copy badge-icon" (click)="copy()" placement="right" ngbTooltip={{message}}></i>

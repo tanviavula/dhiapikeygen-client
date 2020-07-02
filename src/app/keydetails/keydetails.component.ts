@@ -83,7 +83,7 @@ export class KeydetailsComponent implements OnInit, OnDestroy {
       this.appService.search(this.searchStr).subscribe(resp => {
         this.keydetails = resp;
       });
-    } else {
+    } else if (this.searchStr) {
       this.loadApiServiceDetails();
     }
   }

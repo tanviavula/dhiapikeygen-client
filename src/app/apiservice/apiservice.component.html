@@ -10,7 +10,7 @@
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
                     <button type="button" class="btn btn-primary float-right" data-toggle="modal"
-                        data-target="#newApiServiceModal" (click)="close()">Add New Service</button>
+                        data-target="#newApiServiceModal" (click)="close()">Create New Service</button>
                 </div>
             </div>
 
@@ -55,19 +55,32 @@
 
                     <div class="form-group">
                         <label for="name">Service Name </label>
-                        <input type="text" class="form-control" id="name" formControlName="name">
+                        <input  [class.is-invalid]="name.touched && name.invalid" type="text" class="form-control" id="name" formControlName="name">
+
+                        <small id="name" class="form-text text-muted">DESC about Service </small>
+
+                        <div *ngIf="name.touched && name.invalid">
+                            <small *ngIf="name.errors.required" class="text-danger">Service Name can't be empty</small>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" class="form-control" id="description"
+                        <textarea [class.is-invalid]="description.touched && description.invalid"  type="text" class="form-control" id="description"
                             formControlName="description"> </textarea>
+
+                            <small id="description" class="form-text text-muted">DESC about description </small>
+
+                        <div *ngIf="description.touched && description.invalid">
+                            <small *ngIf="description.errors.required" class="text-danger">Description can't be empty</small>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" (click)="close()"
                             data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" [hidden]="canUpdate">Add</button>
+                        <button type="submit" [disabled]="apiForm.invalid" class="btn btn-primary" [hidden]="canUpdate">Add</button>
                         <button type="submit" class="btn btn-primary" [hidden]="!canUpdate">Update</button>
                     </div>
                 </form>

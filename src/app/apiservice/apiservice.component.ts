@@ -2,7 +2,7 @@
 import { AppService } from './../shared/service/app.service';
 import { DhiApiKeyServiceDetailsDTO } from './../shared/model/DhiApiKeyServiceDetailsDTO';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -22,8 +22,8 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder, private appService: AppService) {
     this.apiForm = this.formBuilder.group({
-      name: [],
-      description: []
+      name: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
@@ -70,6 +70,14 @@ export class ApiserviceComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
+  }
+
+  get name() {
+    return this.apiForm.get('name');
+  }
+
+  get description() {
+    return this.apiForm.get('description');
   }
 
 }
